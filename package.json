@@ -1,0 +1,43 @@
+{
+  "name": "birdbot",
+  "version": "1.0.0",
+  "description": "bird tweets",
+  "main": "index.js",
+  "scripts": {
+    "start:local": "node server.js",
+    "start:serverless": "sls offline",
+    "precommit": "npm run encrypt",
+    "develop": "sls invoke local -f tweet --verbose --stage dev",
+    "deploy:dev": "sls deploy",
+    "deploy": "sls deploy --prod",
+    "predeploy": "npm run decrypt",
+    "encrypt": "sls encrypt --stage dev --password $PASSWORD ; sls encrypt --stage prod --password $PASSWORD",
+    "decrypt": "sls decrypt --stage dev --password $PASSWORD; sls decrypt --stage prod --password $PASSWORD",
+    "test": "npm run develop",
+    "fix": "./node_modules/.bin/eslint handler.js --fix",
+    "lint": "./node_modules/.bin/eslint handler.js",
+    "invoke": "sls invoke local -f tweet --verbose --stage dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinGin/BirdBot.git"
+  },
+  "author": "kevin gin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KevinGin/BirdBot/issues"
+  },
+  "homepage": "https://github.com/KevinGin/BirdBot#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "de-loggingsystem": "^1.1.1",
+    "express": "^4.17.1",
+    "oauth": "^0.9.15",
+    "request": "^2.88.2",
+    "twit": "^2.2.11"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "serverless-secrets-plugin": "^0.1.0"
+  }
+}
